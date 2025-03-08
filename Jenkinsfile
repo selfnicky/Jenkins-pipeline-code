@@ -8,7 +8,7 @@ pipeline {
       stage('CodeScan') {
          steps {
             sh 'trivy fs . -o result.html'
-            sh 'cat result.html'
+            
          }
       }
       stage('DockerLogin') {
@@ -24,7 +24,7 @@ pipeline {
       stage('DockerTag') {
          steps {
             sh 'docker tag jenkins-ci:latest $ECR_REPO:latest'
-            sh 'docker tag jenkins-ci:latest $ECR_REPO:v1.${BUILD_NUMBER}'
+            sh 'docker tag jenkins-ci:latest $ECR_REPO:v15.${BUILD_NUMBER}'
          }
       }
       stage('PushImage') {
